@@ -3,6 +3,15 @@ package nu.xell.util;
 import java.util.Collection;
 
 /**
+ * A stack is a FILO (first in, last out) data structure that is
+ * like a pile of elements. A stack has three basic operations:
+ * 
+ * <ul>
+ * <li>Push - put a new element on top of the stack</li>
+ * <li>Pop - "lift" the top element off the stack</li>
+ * <li>Peek - Look at the top element</li>
+ * </ul>
+ * 
  * 
  * @author Tobias Axell
  *
