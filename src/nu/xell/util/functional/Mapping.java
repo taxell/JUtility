@@ -4,17 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * A class with static methods for mapping, functional style.
  * 
  * @author Tobias Axell
- *
  */
 public class Mapping {
 	
+	private Mapping(){}
+	
 	/**
+	 * The map function is a common higher order function in functional
+	 * programming. The map function takes a list of elements of any type
+	 * <i>K</i> and a function of type <i>f : K -> V</i> and creates a new
+	 * list containing the results of applying the argument function to all
+	 * elements in the argument list.
 	 * 
-	 * @param fun
-	 * @param list
-	 * @return
+	 * @param fun A function <i>f : K -> V</i>
+	 * @param list A list with elements of type K
+	 * @return A list <i>L</i> with elements of type <i>V</i> where the element
+	 * 			at index <i>i</i> is computed by applying the argument 
+	 * 			function to the element at index <i>i</i> in the argument
+	 * 			list.
 	 */
 	public static <V, K> List<V> map(Function1<K, V> fun, List<K> list){
 		ArrayList<V> newList = new ArrayList<>(list.size());
@@ -25,10 +35,21 @@ public class Mapping {
 	}
 	
 	/**
+	 * <p>The map function is a common higher order function in functional
+	 * programming. The map function takes a list of elements of any type
+	 * <i>K</i> and a function of type <i>f : K -> V</i> and creates a new
+	 * list containing the results of applying the argument function to all
+	 * elements in the argument list.</p>
 	 * 
-	 * @param fun
-	 * @param list
-	 * @return
+	 * <p>The pmap function is a <i>parallelized</i> version of map. This
+	 * one calculates all values of the new list in a separate thread.</p>
+	 * 
+	 * @param fun A function <i>f : K -> V</i>
+	 * @param list A list with elements of type K
+	 * @return A list <i>L</i> with elements of type <i>V</i> where the element
+	 * 			at index <i>i</i> is computed by applying the argument 
+	 * 			function to the element at index <i>i</i> in the argument
+	 * 			list.
 	 */
 	public static <V, K> List<V> pmap(Function1<K, V> fun, List<K> list){
 		@SuppressWarnings("unchecked")
@@ -57,15 +78,32 @@ public class Mapping {
 	}
 	
 	/**
+	 * <p>The map function is a common higher order function in functional
+	 * programming. The map function takes a list of elements of any type
+	 * <i>K</i> and a function of type <i>f : K -> V</i> and creates a new
+	 * list containing the results of applying the argument function to all
+	 * elements in the argument list.</p>
 	 * 
-	 * @param fun
-	 * @param list
-	 * @param threads
-	 * @return
+	 * <p>The pmap function is a <i>parallelized</i> version of map. This
+	 * one calculates all values of the new list in a specified number of
+	 * threads.</p>
+	 * 
+	 * @param fun A function <i>f : K -> V</i>
+	 * @param list A list with elements of type K
+	 * @param threads The number of threads to use
+	 * @return A list <i>L</i> with elements of type <i>V</i> where the element
+	 * 			at index <i>i</i> is computed by applying the argument 
+	 * 			function to the element at index <i>i</i> in the argument
+	 * 			list.
 	 */
 	public static <V, K> List<V> pmap(Function1<K, V> fun, List<K> list, int threads){
 		@SuppressWarnings("unchecked")
 		V[] newList = (V[])(new Object[list.size()]);
+		
+		if(threads < 1){
+			throw new IllegalArgumentException("The number of threads must be greater than 0");
+		}
+		
 		Thread[] ts = new Thread[threads];
 		
 		int ptr = 0;
@@ -100,27 +138,14 @@ public class Mapping {
 		return ret;
 	}
 	
-	/**
-	 * 
-	 * @author Tobias Axell
-	 *
-	 * @param <K>
-	 * @param <V>
-	 */
-	protected static class MapWorker<K, V> implements Runnable{
+	
+	private static class MapWorker<K, V> implements Runnable{
 		
 		protected final Function1<K, V> mappingStrategy;
 		protected final int index;
 		protected final V[] results;
 		protected final K key;
 		
-		/**
-		 * 
-		 * @param mappingStrategy
-		 * @param key
-		 * @param i
-		 * @param res
-		 */
 		public MapWorker(Function1<K, V> mappingStrategy, K key, int i, V[] res){
 			this.mappingStrategy = mappingStrategy;
 			this.key = key;
@@ -135,13 +160,6 @@ public class Mapping {
 		
 	}
 	
-	/**
-	 * 
-	 * @author Tobias Axell
-	 *
-	 * @param <K>
-	 * @param <V>
-	 */
 	protected static class MapWorker2<K, V> implements Runnable{
 		protected final Function1<K, V> mappingStrategy;
 		protected final int 	fromI;
@@ -149,14 +167,6 @@ public class Mapping {
 		protected final List<K> keys;
 		protected final V[] 	results;
 		
-		/**
-		 * 
-		 * @param ms
-		 * @param keys
-		 * @param res
-		 * @param from
-		 * @param to
-		 */
 		public MapWorker2(Function1<K, V> ms, List<K> keys, V[] res, int from, int to){
 			this.mappingStrategy = ms;
 			this.keys = keys;
@@ -164,7 +174,6 @@ public class Mapping {
 			fromI = from;
 			toI = to;
 		}
-		
 		
 		@Override
 		public void run() {
