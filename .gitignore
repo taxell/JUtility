@@ -10,3 +10,6 @@
 .project
 /bin/
 /.settings/
+
+# Other files & folders #
+/test/
