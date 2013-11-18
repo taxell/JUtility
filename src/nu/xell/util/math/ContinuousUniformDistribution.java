@@ -31,11 +31,12 @@ public class ContinuousUniformDistribution implements ContinuousDistribution {
 	 * @param generator A random generator for generating random numbers of this distribution.
 	 */
 	public ContinuousUniformDistribution(double a, double b, Random generator) {
-		
 		if(a <= b){
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("b must me strictly greater than a");
 		}
-		
+		if(generator == null){
+			throw new NullPointerException();
+		}
 		this.a = a;
 		this.b = b;
 		randomGenerator = generator;

@@ -29,6 +29,12 @@ public class PoissonDistribution extends AbstractDiscreteDistribution{
 	 * @param generator A random generator for generating random numbers of this distribution.
 	 */
 	public PoissonDistribution(double lambda, Random generator){
+		if(lambda <= 0){
+			throw new IllegalArgumentException("lambda must be greater than 0");
+		}
+		if(generator == null){
+			throw new NullPointerException();
+		}
 		this.lambda = lambda;
 		this.generator = generator;
 	}

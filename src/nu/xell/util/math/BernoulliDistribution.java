@@ -15,22 +15,29 @@ public class BernoulliDistribution extends AbstractDiscreteDistribution {
 	/**
 	 * Constructor for BernoulliDistribution.
 	 * 
-	 * @param p The probability a Bernoulli trial to result in 0 rather than 1,
+	 * @param p The probability a Bernoulli trial to result in 1 rather than 0,
 	 * (success or failure).
 	 */
 	public BernoulliDistribution(double p){
-		this.p = p;
-		generator = new Random();
+		this(p, new Random());
 	}
 	
 	/**
 	 * Constructor for BernoulliDistribution.
 	 * The probability of a Bernoulli trial to result in 0 rather than 1.
-	 * @param p The probability a Bernoulli trial to result in 0 rather than 1,
+	 * 
+	 * @param p The probability a Bernoulli trial to result in 1 rather than 0,
 	 * (success or failure).
 	 * @param generator A random generator for generating random numbers of this distribution.
 	 */
 	public BernoulliDistribution(double p, Random generator){
+		if(p < 0 || 1 < p){
+			throw new IllegalArgumentException("p must be in the interval [0, 1]");
+		}
+		if(generator == null){
+			throw new NullPointerException();
+		}
+		
 		this.p = p;
 		this.generator = generator;
 	}
@@ -69,9 +76,9 @@ public class BernoulliDistribution extends AbstractDiscreteDistribution {
 	@Override
 	public double nextRandom() {
 		if(generator.nextDouble() < p){
-			return 0;
-		} else {
 			return 1;
+		} else {
+			return 0;
 		}
 	}
 }

@@ -19,8 +19,9 @@ public class BinomialDistribution extends AbstractDiscreteDistribution {
 	/**
 	 * Constructor for BinomialDistribution.
 	 * 
-	 * @param n The n of ~Bin(n, p)
-	 * @param p The p of ~Bin(n, p)
+	 * @param n The number of Bernoulli trials.
+	 * @param p The probability of each Bernoulli trial to result in 1 (success)
+	 * 			rather than 0 (failure).
 	 */
 	public BinomialDistribution(int n, double p){
 		this(n, p, new Random());
@@ -29,11 +30,10 @@ public class BinomialDistribution extends AbstractDiscreteDistribution {
 	/**
 	 * Constructor for BinomialDistribution.
 	 * 
-	 * @param n The n of ~Bin(n, p)
-	 * @param p The p of ~Bin(n, p)
-	 * @param generator A pseudo random number generator 
-	 * 					   for the <code>nextRandom()</code> method for 
-	 * 					   producing random numbers distributed over ~Bin(n, p).
+	 * @param n The number of Bernoulli trials.
+	 * @param p The probability of each Bernoulli trial to result in 1 (success)
+	 * 			rather than 0 (failure).
+	 * @param generator A random generator for generating random numbers of this distribution.
 	 */
 	public BinomialDistribution(int n, double p, Random generator){
 		this.n = n;
@@ -58,8 +58,7 @@ public class BinomialDistribution extends AbstractDiscreteDistribution {
 	}
 	
 	/**
-	 * Gives the <b>p</b>, probability of one experiment to give a certain outcome
-	 * (i.e. one over the number of possible outcomes), of this distribution.
+	 * Gives the <b>p</b>, probability of each Bernoulli trial to succeed.
 	 * 
 	 * @return The <b>p</b> of this distribution.
 	 */
@@ -84,8 +83,8 @@ public class BinomialDistribution extends AbstractDiscreteDistribution {
 		}
 		
 		BigDecimal nk = new BigDecimal(AMath.nChooseK(n, x));
-		return nk.multiply(new BigDecimal(Math.pow(p, x))).
-					multiply(new BigDecimal(Math.pow(1-p, n-x))).doubleValue();
+		return nk.multiply(new BigDecimal(StrictMath.pow(p, x)))
+				.multiply(new BigDecimal(StrictMath.pow(1-p, n-x))).doubleValue();
 	}
 
 	@Override

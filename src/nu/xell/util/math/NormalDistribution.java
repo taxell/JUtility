@@ -5,7 +5,7 @@ import java.util.Random;
 import nu.xell.util.functional.Function1;
 
 /**
- * This is a normal distribution for mathematical and statistical
+ * A normal distribution for mathematical and statistical
  * purposes.
  * 
  * @author Tobias Axell
@@ -37,6 +37,12 @@ public class NormalDistribution implements ContinuousDistribution{
 	 * 						distributed in N(mean, variance).
 	 */
 	public NormalDistribution(double mean, double variance, Random generator){
+		if(generator == null){
+			throw new NullPointerException();
+		}
+		if(variance <= 0){
+			throw new IllegalArgumentException("variance must be greater than 0");
+		}
 		this.mean = mean;
 		this.variance = variance;
 		this.probabilityDensityCoefficient = 
