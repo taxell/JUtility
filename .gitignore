@@ -10,3 +10,6 @@
 .project
 /bin/
 /.settings/
+
+# "Inofficial" (small) tests #
+/silly_tests/
