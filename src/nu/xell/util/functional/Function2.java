@@ -1,7 +1,7 @@
 package nu.xell.util.functional;
 
 /**
- * The Function1 is an interface describing a
+ * The Function2 is an interface describing a
  * two variable function, f : A -> B -> C, using
  * the strategy pattern.
  * 
