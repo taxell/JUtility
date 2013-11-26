@@ -17,7 +17,7 @@ public interface ProbabilityDistribution {
 	public double expectedValue();
 	
 	/**
-	 * The variance of stochastic variables over this distribution.
+	 * The variance of a stochastic variable of this distribution.
 	 * 
 	 * @return The variance of this distribution.
 	 */

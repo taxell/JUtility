@@ -49,7 +49,8 @@ public class BinomialDistribution extends AbstractDiscreteDistribution {
 	}
 	
 	/**
-	 * Gives the <b>n</b>, number of experiments, of this distribution.
+	 * Gives the <b>n</b>, number of experiments (Bernoulli trials), 
+	 * of the binomial distribution.
 	 * 
 	 * @return The <b>n</b> of this distribution.
 	 */

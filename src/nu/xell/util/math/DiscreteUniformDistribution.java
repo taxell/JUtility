@@ -34,7 +34,7 @@ public class DiscreteUniformDistribution extends AbstractDiscreteDistribution {
 	 */
 	public DiscreteUniformDistribution(int a, int b, Random generator){
 		if(b < a){
-			throw new IllegalArgumentException("n must be greater than 0");
+			throw new IllegalArgumentException("b must be greater than or equal to a");
 		}
 		if(generator == null){
 			throw new NullPointerException();
