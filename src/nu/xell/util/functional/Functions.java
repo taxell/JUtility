@@ -595,4 +595,36 @@ public class Functions {
 			}
 		};
 	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	
+	/**
+	 * 
+	 * @param f
+	 * @return
+	 */
+	public static <A, B, C> Function2<A, B, C> curry(final Function1<Tuple2<A, B>, C> f){
+		return new Function2<A, B, C>() {
+
+			@Override
+			public C f(A a, B b) {
+				return f.f(new Tuple2<A, B>(a, b));
+			}
+		};
+	}
+	
+	/**
+	 * 
+	 * @param f
+	 * @return
+	 */
+	public static <A, B, C> Function1<Tuple2<A, B>, C> uncurry(final Function2<A, B, C> f){
+		return new Function1<Tuple2<A,B>, C>() {
+
+			@Override
+			public C f(Tuple2<A, B> t) {
+				return f.f(t.first, t.second);
+			}
+		};
+	}
 }
