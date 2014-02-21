@@ -442,7 +442,7 @@ public class Functions {
 	 * @param f2 The <i>inner</i> function.
 	 * @return The function f1( f2( a ) ).
 	 */
-	public static <A, B, C> Function1<A, C> fOf(final Function1<B, C> f1, final Function1<A, B> f2){
+	public static <A, B, C> Function1<A, C> compose(final Function1<B, C> f1, final Function1<A, B> f2){
 		return new Function1<A, C>(){
 
 			@Override
@@ -460,7 +460,7 @@ public class Functions {
 	 * @param f2 The <i>inner</i> function.
 	 * @return The function f1( f2( a, b ) ).
 	 */
-	public static <A, B, C, D> Function2<A, B, D> fOf(final Function1<C, D> f1, final Function2<A, B, C> f2){
+	public static <A, B, C, D> Function2<A, B, D> compose(final Function1<C, D> f1, final Function2<A, B, C> f2){
 		return new Function2<A, B, D>(){
 
 			@Override
@@ -478,7 +478,7 @@ public class Functions {
 	 * @param f2 The <i>inner</i> function.
 	 * @return The function f1( f2( a, b, c ) ).
 	 */
-	public static <A, B, C, D, E> Function3<A, B, C, E> fOf(final Function1<D, E> f1, final Function3<A, B, C, D> f2){
+	public static <A, B, C, D, E> Function3<A, B, C, E> compose(final Function1<D, E> f1, final Function3<A, B, C, D> f2){
 		return new Function3<A, B, C, E>(){
 
 			@Override
@@ -496,7 +496,7 @@ public class Functions {
 	 * @param f2 The <i>inner</i> function.
 	 * @return The function f1( f2( a, b, c, d ) ).
 	 */
-	public static <A, B, C, D, E, F> Function4<A, B, C, D, F> fOf(final Function1<E, F> f1, final Function4<A, B, C, D, E> f2){
+	public static <A, B, C, D, E, F> Function4<A, B, C, D, F> compose(final Function1<E, F> f1, final Function4<A, B, C, D, E> f2){
 		return new Function4<A, B, C, D, F>(){
 
 			@Override
@@ -514,7 +514,7 @@ public class Functions {
 	 * @param f2 The <i>inner</i> function.
 	 * @return The function f1( f2( a, b, c, d, e ) ).
 	 */
-	public static <A, B, C, D, E, F, G> Function5<A, B, C, D, E, G> fOf(final Function1<F, G> f1, final Function5<A, B, C, D, E, F> f2){
+	public static <A, B, C, D, E, F, G> Function5<A, B, C, D, E, G> compose(final Function1<F, G> f1, final Function5<A, B, C, D, E, F> f2){
 		return new Function5<A, B, C, D, E, G>(){
 
 			@Override
@@ -532,7 +532,7 @@ public class Functions {
 	 * @param f2 The <i>inner</i> function.
 	 * @return The function f1( f2( a, b, c, d, e, f ) ).
 	 */
-	public static <A, B, C, D, E, F, G, H> Function6<A, B, C, D, E, F, H> fOf(final Function1<G, H> f1, final Function6<A, B, C, D, E, F, G> f2){
+	public static <A, B, C, D, E, F, G, H> Function6<A, B, C, D, E, F, H> compose(final Function1<G, H> f1, final Function6<A, B, C, D, E, F, G> f2){
 		return new Function6<A, B, C, D, E, F, H>(){
 
 			@Override
@@ -550,7 +550,7 @@ public class Functions {
 	 * @param f2 The <i>inner</i> function.
 	 * @return The function f1( f2( a, b, c, d, e, f, g ) ).
 	 */
-	public static <A, B, C, D, E, F, G, H, I> Function7<A, B, C, D, E, F, G, I> fOf(final Function1<H, I> f1, final Function7<A, B, C, D, E, F, G, H> f2){
+	public static <A, B, C, D, E, F, G, H, I> Function7<A, B, C, D, E, F, G, I> compose(final Function1<H, I> f1, final Function7<A, B, C, D, E, F, G, H> f2){
 		return new Function7<A, B, C, D, E, F, G, I>(){
 
 			@Override
@@ -568,7 +568,7 @@ public class Functions {
 	 * @param f2 The <i>inner</i> function.
 	 * @return The function f1( f2( a, b, c, d, e, f, g, h ) ).
 	 */
-	public static <A, B, C, D, E, F, G, H, I, J> Function8<A, B, C, D, E, F, G, H, J> fOf(final Function1<I, J> f1, final Function8<A, B, C, D, E, F, G, H, I> f2){
+	public static <A, B, C, D, E, F, G, H, I, J> Function8<A, B, C, D, E, F, G, H, J> compose(final Function1<I, J> f1, final Function8<A, B, C, D, E, F, G, H, I> f2){
 		return new Function8<A, B, C, D, E, F, G, H, J>(){
 
 			@Override
@@ -586,7 +586,7 @@ public class Functions {
 	 * @param f2 The <i>inner</i> function.
 	 * @return The function f1( f2( a, b, c, d, e, f, g, h, i ) ).
 	 */
-	public static <A, B, C, D, E, F, G, H, I, J, K> Function9<A, B, C, D, E, F, G, H, I, K> fOf(final Function1<J, K> f1, final Function9<A, B, C, D, E, F, G, H, I, J> f2){
+	public static <A, B, C, D, E, F, G, H, I, J, K> Function9<A, B, C, D, E, F, G, H, I, K> compose(final Function1<J, K> f1, final Function9<A, B, C, D, E, F, G, H, I, J> f2){
 		return new Function9<A, B, C, D, E, F, G, H, I, K>(){
 
 			@Override
@@ -594,5 +594,26 @@ public class Functions {
 				return f1.f(f2.f(a, b, c, d, e, f, g, h, i));
 			}
 		};
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	/**
+	 * Infix function calling. This does not do anything itself,
+	 * it just allows a programmer to call a function in a infix looking way. <br></br><br></br>
+	 * 
+	 * Example: Given an element <i>a</i>, an element <i>b</i> and a function that one want to call infix, 
+	 * lets say it's called <i>plus</i>, the usual way to call <i>plus</i> would be <code>plus.f(a, b)</code>.
+	 * Using this method one "add" <i>a</i> and <i>b</i> by calling <code>$(a, plus, b)</code>.
+	 * Note: This method is only for code esthetics, it doesn't <i>do</i> anything 
+	 * and may actually be bad for performance.
+	 * 
+	 * @param a The first argument to the operator.
+	 * @param f The "operator" itself.
+	 * @param b The second argument to the operator.
+	 * @return The result of applying the operator to the arguments.
+	 */
+	public static <A, B, C> C $(A a, Function2<A, B, C> f, B b){
+		return f.f(a, b);
 	}
 }
