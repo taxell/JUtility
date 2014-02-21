@@ -17,9 +17,10 @@ package nu.xell.util.functional;
  * the identity value. Lists are also monoids with list concatenation as append operation and
  * the empty list as identity element.
  * 
+ * @param M
  * @author Tobias Axell
  */
-public interface Monoid {
+public interface Monoid<M extends Monoid<M>> {
 	
 	/**
 	 * The append operation. Appends a the given object to this object.
@@ -27,7 +28,7 @@ public interface Monoid {
 	 * @param m The object to append to this object.
 	 * @return The result of appending <b>m</b> to this object.
 	 */
-	public Monoid mAppend(Monoid m);
+	public M mAppend(M m);
 	
 	/**
 	 * Concatenates all elements in the given list using the mAppend operation and appends
@@ -36,12 +37,12 @@ public interface Monoid {
 	 * @param l The list of elements to concatenate.
 	 * @return this object and all elements of the list <b>l</b> concatenated using mAppend.
 	 */
-	public Monoid mConcat(FunctionalList<Monoid> l);
+	public M mConcat(FunctionalList<M> l);
 	
 	/**
 	 * Gives the identity element of this monoid type.
 	 * 
 	 * @return The identity element.
 	 */
-	public Monoid mEmpty();
+	public M mEmpty();
 }
