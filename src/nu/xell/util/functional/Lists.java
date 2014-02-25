@@ -185,53 +185,88 @@ public final class Lists {
 	}
 	
 	/**
+	 * Applies the given function to all elements of the given
+	 * list and returns a list of all the results.
 	 * 
-	 * @param f
-	 * @return
+	 * @param f The function to apply on all elements of the given list.
+	 * @param l The list to map over.
+	 * @return A list of the results of applying the function
+	 * 			<i>f</i> to the elements of the list <i>l</i>.
 	 */
 	public <E,D> FunctionalList<D> map(Function1<E,D> f, FunctionalList<E> l){
 		return l.map(f);
 	}
 	
 	/**
+	 * Folds a given list <i>l</i> from the right with a given function 
+	 * <i>f</i> and a given base element <i>d</i>. For more information
+	 * about fold operations, please read: <br></br>
+	 * <a href="http://en.wikipedia.org/wiki/Fold_(higher-order_function)">This related wikipedia article</a> <br></br>
+	 * <a href="http://learnyouahaskell.com/higher-order-functions#folds">Learn you a Haskell</a>
 	 * 
-	 * @param f
-	 * @param d
-	 * @return
+	 * @param f The function to fold with.
+	 * @param d The base element for the fold operation.
+	 * @param l The list to fold over.
+	 * @return The result of reducing the given list with the given function and base element.
 	 */
 	public <E, D> D foldr(Function2<E, D, D> f, D d, FunctionalList<E> l){
 		return l.foldr(f, d);
 	}
 	
 	/**
+	 * Foldr1 is a special case of foldr, that has the same return type as
+	 * the type of the elements in the given list and has no base element. Foldr1 is
+	 * therefore undefined for the empty list. <br></br><br></br>
 	 * 
-	 * @param f
-	 * @return
+	 * Example: foldr1 on the list [1, 2, 3, 4] with the function +, (as in addition),
+	 * is 1 + 2 + 3 + 4.
+	 * 
+	 * @param f The function to fold with.
+	 * @param l The list to fold over.
+	 * @return The result of reducing this list with the given function.
+	 * @throws NilListException If this list is nil.
 	 */
 	public <E> E foldr1(Function2<E, E, E> f, FunctionalList<E> l){
 		return l.foldr1(f);
 	}
 	
 	/**
+	 * Folds a given list <i>l</i> from the left with a given function 
+	 * <i>f</i> and a given base element <i>d</i>. For more information
+	 * about fold operations, please read: <br></br>
+	 * <a href="http://en.wikipedia.org/wiki/Fold_(higher-order_function)">This related wikipedia article</a> <br></br>
+	 * <a href="http://learnyouahaskell.com/higher-order-functions#folds">Learn you a Haskell</a>
 	 * 
-	 * @param f
-	 * @param a
-	 * @return
+	 * @param f The function to fold with.
+	 * @param d The base element for the fold operation.
+	 * @param l The list to fold over.
+	 * @return The result of reducing the given list with the given function and base element.
 	 */
 	public <E, D> D foldl(Function2<D, E, D> f, D a, FunctionalList<E> l){
 		return l.foldl(f, a);
 	}
 	
 	/**
+	 * Foldl1 is a special case of foldl, that has the same return type as
+	 * the type of the elements in the given list and has no base element. Foldl1 is
+	 * therefore undefined for the empty list. <br></br><br></br>
 	 * 
-	 * @param f
-	 * @return
+	 * Example: foldl1 on the list [1, 2, 3, 4] with the function +, (as in addition),
+	 * is 1 + 2 + 3 + 4.
+	 * 
+	 * @param f The function to fold with.
+	 * @param l The list to fold over.
+	 * @return The result of reducing this list with the given function.
+	 * @throws NilListException If this list is nil.
 	 */
 	public static <E> E foldl1(Function2<E, E, E> f, FunctionalList<E> l){
 		return l.foldl1(f);
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////// Higher order functions on java.util.List lists ///////////////////////
+	
+	// MAP
 	
 	/**
 	 * The map function is a common higher order function in functional
@@ -381,7 +416,7 @@ public final class Lists {
 		
 	}
 	
-	protected static class MapWorker2<K, V> implements Runnable{
+	private static class MapWorker2<K, V> implements Runnable{
 		protected final Function1<K, V> mappingStrategy;
 		protected final int 	fromI;
 		protected final int 	toI;
@@ -402,5 +437,75 @@ public final class Lists {
 				results[i] = mappingStrategy.f(keys.get(i));
 			}
 		}
+	}
+	
+	//////////////////////////////////////////////////////////////////////////////////////////
+	// ZIP
+	
+	/**
+	 * Zip takes two lists containing elements of any two types and
+	 * pairs the elements together creating a list of tuples, where each tuple contains one element
+	 * from each list. If one list has more elements than the other the "extra" elements are
+	 * left out.
+	 * 
+	 * @param as One of the lists to pick elements from.
+	 * @param bs The other list to pick elements from.
+	 * @return A single list of pairs of elements from the lists <i>as</i> and <i>bs</i>.
+	 */
+	public static <A, B> List<Tuple2<A, B>> zip(List<A> as, List<B> bs){
+		//TODO (low level) optimize by implementing "manually" without zipWith
+		return zipWith(new Function2<A, B, Tuple2<A, B>>() {
+			@Override
+			public Tuple2<A, B> f(A a, B b) {
+				return new Tuple2<>(a,b);
+			}
+		}, as, bs);
+	}
+	
+	/**
+	 * The "inverted" zip function. Unzip takes a list of pairs (2-tuples) and
+	 * splits the pairs, returning a pair of lists, each list containing one "side" of the pair
+	 * elements of the argument list.
+	 * 
+	 * @param ts A list of pairs of elements to split up.
+	 * @return Two lists (in a tuple) containing the elements from the tuples in the original 
+	 * 			list separated.
+	 */
+	public static <A, B> Tuple2<List<A>, List<B>> unzip(List<Tuple2<A, B>> ts){
+		List<A> as = new ArrayList<>(ts.size());
+		List<B> bs = new ArrayList<>(ts.size());
+		
+		Iterator<Tuple2<A, B>> i = ts.iterator();
+		
+		while (i.hasNext()) {
+			Tuple2<A, B> t = (Tuple2<A, B>) i.next();
+			as.add(t.first);
+			bs.add(t.second);
+		}
+		return new Tuple2<List<A>, List<B>>(as, bs);
+	}
+	
+	/**
+	 * ZipWith is a generalized version of zip. It takes two lists and instead of just combining the
+	 * elements to a tuple, it takes an arbitrary function that is used to pairwise combine the
+	 * of the two lists.
+	 * 
+	 * @param f The function to "combine" elements with.
+	 * @param as The first list.
+	 * @param bs The other list.
+	 * @return A list that contains the results of pairwise combining the elements of the given lists
+	 * 			with the function, <i>f</i>.
+	 */
+	public static <A, B, C> List<C> zipWith(Function2<A, B, C> f, List<A> as, List <B> bs){
+		int newSize = Math.min(as.size(), bs.size());
+		List<C> rs = new ArrayList<>(newSize);
+		Iterator<A> ia = as.iterator();
+		Iterator<B> ib = bs.iterator();
+		
+		for(int i = 0; i < newSize; i++){
+			rs.add(f.f(ia.next(), ib.next()));
+		}
+		
+		return rs;
 	}
 }

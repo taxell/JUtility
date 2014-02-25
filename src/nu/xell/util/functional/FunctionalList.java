@@ -141,7 +141,7 @@ public interface FunctionalList<E> extends Iterable<E>, Monad<FunctionalList, E>
 	 * 
 	 * @param f The function to fold with.
 	 * @return The result of reducing this list with the given function.
-	 * @throws UndefinedOperationException If this list is nil.
+	 * @throws NilListException If this list is nil.
 	 */
 	public E foldr1(Function2<E, E, E> f);
 	
@@ -168,7 +168,7 @@ public interface FunctionalList<E> extends Iterable<E>, Monad<FunctionalList, E>
 	 * 
 	 * @param f The function to fold with.
 	 * @return The result of reducing this list with the given function.
-	 * @throws UndefinedOperationException If this list is nil.
+	 * @throws NilListException If this list is nil.
 	 */
 	public E foldl1(Function2<E, E, E> f);
 }
