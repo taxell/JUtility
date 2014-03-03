@@ -1,4 +1,4 @@
-package nu.xell.util.math;
+package se.xell.util.math;
 
 /**
  * A linear function <i>f(x) = kx + m</i> is a special case

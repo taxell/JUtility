@@ -1,4 +1,4 @@
-package nu.xell.util.math;
+package se.xell.util.math;
 
 /**
  * An Abstract class implementing the methods of a discrete distribution

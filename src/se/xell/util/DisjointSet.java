@@ -1,4 +1,4 @@
-package nu.xell.util;
+package se.xell.util;
 
 import java.io.Serializable;
 

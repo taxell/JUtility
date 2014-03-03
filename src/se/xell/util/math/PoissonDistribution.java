@@ -1,4 +1,4 @@
-package nu.xell.util.math;
+package se.xell.util.math;
 
 import java.math.BigDecimal;
 import java.util.Random;

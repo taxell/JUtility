@@ -1,4 +1,4 @@
-package nu.xell.util.math;
+package se.xell.util.math;
 
 /**
  * An interface representing a discrete probability distribution.

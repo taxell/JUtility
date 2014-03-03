@@ -1,4 +1,4 @@
-package nu.xell.util;
+package se.xell.util;
 
 /**
  * An observer according the observer design pattern. 

@@ -1,4 +1,4 @@
-package nu.xell.util;
+package se.xell.util;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -11,7 +11,7 @@ import java.util.List;
  * @author Tobias Axell
  * @version 0.1
  */
-public abstract class AbstractObservable implements nu.xell.util.Observable {
+public abstract class AbstractObservable implements se.xell.util.Observable {
 	
 	private final List<Observer> observers;
 	

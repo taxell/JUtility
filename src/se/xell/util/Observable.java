@@ -1,4 +1,4 @@
-package nu.xell.util;
+package se.xell.util;
 
 /**
  * An observable according to the observer pattern. 
@@ -24,14 +24,14 @@ public interface Observable {
 	 * 
 	 * @param o The observer to add.
 	 */
-	public void addObserver(nu.xell.util.Observer o);
+	public void addObserver(se.xell.util.Observer o);
 	
 	/**
 	 * Removes an observer from this observable.
 	 * 
 	 * @param o The observer to remove.
 	 */
-	public void removeObserver(nu.xell.util.Observer o);
+	public void removeObserver(se.xell.util.Observer o);
 	
 	/**
 	 * Notifies all observers currently observing this object.
