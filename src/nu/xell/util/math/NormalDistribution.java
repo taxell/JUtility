@@ -2,7 +2,7 @@ package nu.xell.util.math;
 
 import java.util.Random;
 
-import nu.xell.util.functional.Function1;
+import se.xell.junky.Function1;
 
 /**
  * A normal distribution for mathematical and statistical

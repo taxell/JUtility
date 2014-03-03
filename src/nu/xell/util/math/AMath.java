@@ -2,7 +2,7 @@ package nu.xell.util.math;
 
 import java.math.BigInteger;
 
-import nu.xell.util.functional.Function1;
+import se.xell.junky.Function1;
 
 /**
  * A mathematics class with slightly more advanced features than
