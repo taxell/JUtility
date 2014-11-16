@@ -261,6 +261,30 @@ public final class AMath {
 	}
 	
 	/**
+	 * 
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	public static int gcd(int a, int b){
+		return euclidianGcdHelper(Math.abs(Math.min(a, b)), Math.abs(Math.max(a, b)));
+	}
+	
+	/*
+	 * Eucliean GCD algorithm.
+	 * PRECONDITIONS:
+	 * 		 0 <= a <= b
+	 */
+	private static int euclidianGcdHelper(int a, int b){
+		while(b != 0){
+			int t = b;
+			b = a % b;
+			a = t;
+		}
+		return a;
+	}
+	
+	/**
 	 * Calculates the factorial of <b>n</b>; (<b>n</b>!).
 	 * 
 	 * @param n - The number to calculate the factorial of.
